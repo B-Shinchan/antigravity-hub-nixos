@@ -8,7 +8,7 @@ on:
       - scripts/**
       - tests/**
   schedule:
-    - cron: '0 6 * * *' # Daily at 11:30 AM IST (06:00 UTC)
+    - cron: '0 */6 * * *' # Every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
   workflow_dispatch:
 
 concurrency:
@@ -25,7 +25,7 @@ jobs:
     timeout-minutes: 60
     outputs:
       has_update: ${{ steps.check.outputs.has_update }}
-      publish_required: ${{ steps.check.outputs.has_update == 'true' || github.event_name == 'push' }}
+      publish_required: ${{ steps.check.outputs.has_update == 'true' }}
       candidate_artifact_id: ${{ steps.candidate.outputs.artifact-id }}
     steps:
       - name: Checkout repository
@@ -51,7 +51,7 @@ jobs:
       - name: Refresh official Nixpkgs pin on the first Monday of the month
         run: |
           set -euo pipefail
-          if (( 10#$(date -u +%d) <= 7 )); then
+          if [ "$(date -u +%u)" -eq 1 ] && (( 10#$(date -u +%d) <= 7 )); then
             nix flake update nixpkgs
           fi
 

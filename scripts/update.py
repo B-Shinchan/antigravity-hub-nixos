@@ -334,6 +334,17 @@ def main() -> None:
 
         if not changed:
             print("Already up to date — no changes needed.")
+            if args.candidate:
+                cdata_out = {
+                    "version": new_version,
+                    "build": new_build,
+                    "hash": current_hash,
+                    "url": linux_x64_url,
+                }
+                if lock_changed:
+                    cdata_out["nixpkgs_lock"] = lock_update
+                args.candidate.write_text(json.dumps(cdata_out, indent=2) + "\n")
+                print(f"Candidate metadata written to {args.candidate}")
             if out := os.environ.get("GITHUB_OUTPUT"):
                 with open(out, "a") as f:
                     f.write(f"has_update=false\nversion={current_version}\n")
