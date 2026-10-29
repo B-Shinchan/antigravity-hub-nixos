@@ -1,0 +1,51 @@
+name: CI Build & Health Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Enable user namespaces for the runtime sandbox
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@448cde739abec1eaf0646249e3d25bb8d9bc7702 # v31.11.2
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Install headless desktop test tools
+        run: sudo apt-get update && sudo apt-get install -y xvfb xauth dbus-x11
+
+      - name: Test update selection
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Check Nix formatting
+        run: nix fmt -- --check *.nix
+
+      - name: Check flake, updater, and desktop integration
+        run: nix flake check --print-build-logs
+
+      - name: Build package
+        run: nix build .#default --print-build-logs
+
+      - name: Check packaged desktop entry and assets
+        run: nix shell --inputs-from . nixpkgs#python3 nixpkgs#desktop-file-utils -c python3 scripts/check-desktop.py ./result
+
+      - name: Check packaged runtime
+        run: bash scripts/check-runtime.sh

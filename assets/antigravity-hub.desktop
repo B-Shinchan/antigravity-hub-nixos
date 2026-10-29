@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Antigravity Hub
+Comment=Google Antigravity 2.0 — agentic AI coding command center
+Exec=antigravity-hub %U
+Icon=antigravity-hub
+Type=Application
+StartupNotify=true
+StartupWMClass=Antigravity
+Categories=Development;
+MimeType=x-scheme-handler/antigravity-hub;
+Keywords=ai;coding;agent;google;antigravity;
