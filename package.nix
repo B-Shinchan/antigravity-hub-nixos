@@ -108,15 +108,19 @@ let
         mkdir -p $out/share/icons/hicolor/''${size}x''${size}/apps
         magick "$_icon_src" -filter Lanczos -resize ''${size}x''${size} \
           $out/share/icons/hicolor/''${size}x''${size}/apps/antigravity-hub.png
+        ln -s antigravity-hub.png $out/share/icons/hicolor/''${size}x''${size}/apps/antigravity.png
       done
       install -Dm644 ${./assets/antigravity-hub.png} $out/share/pixmaps/antigravity-hub.png
+      ln -s antigravity-hub.png $out/share/pixmaps/antigravity.png
 
-      # Install desktop entry
+      # Install desktop entries (both canonical antigravity-hub and Wayland app_id alias antigravity)
       install -Dm644 ${./assets/antigravity-hub.desktop} \
         $out/share/applications/antigravity-hub.desktop
+      ln -s antigravity-hub.desktop $out/share/applications/antigravity.desktop
 
-      # Validate the desktop file
+      # Validate the desktop files
       desktop-file-validate $out/share/applications/antigravity-hub.desktop
+      desktop-file-validate $out/share/applications/antigravity.desktop
 
       runHook postInstall
     '';

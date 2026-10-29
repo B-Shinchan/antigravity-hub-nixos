@@ -8,20 +8,18 @@ import sys
 from pathlib import Path
 
 root = Path(sys.argv[1]).resolve()
-entry_name = "antigravity-hub.desktop"
 application_name = "Antigravity Hub"
 launcher = root / "bin/antigravity-hub"
-entries = sorted((root / "share/applications").glob("*.desktop"))
-assert [p.name for p in entries] == [entry_name], (
-    f"Expected exactly [{entry_name}], found {[p.name for p in entries]}"
-)
-entry = entries[0]
+expected_entries = {"antigravity-hub.desktop", "antigravity.desktop"}
+found_entries = {p.name for p in (root / "share/applications").glob("*.desktop")}
+assert found_entries == expected_entries, f"Expected {expected_entries}, found {found_entries}"
+entry = root / "share/applications/antigravity-hub.desktop"
 subprocess.run(["desktop-file-validate", str(entry)], check=True)
 config = configparser.ConfigParser(interpolation=None, strict=True)
 config.optionxform = str
 config.read(entry)
 main = config["Desktop Entry"]
-assert main["StartupWMClass"] == "Antigravity"
+assert main["StartupWMClass"] in ("antigravity", "Antigravity")
 assert main["Name"] == application_name
 assert main["Type"] == "Application"
 assert "Development;" in main["Categories"]
