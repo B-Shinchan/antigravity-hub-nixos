@@ -1,9 +1,16 @@
-# Google Antigravity Hub for NixOS
+<div align="center">
+  <img src="./assets/antigravity-hub.png" alt="Google Antigravity Hub Logo" width="128" height="128" />
+  <h1>Google Antigravity Hub on NixOS</h1>
+  <p>Official Google Antigravity 2.0 standalone agent mission control desktop application</p>
 
-[![CI Status](https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/ci.yml/badge.svg)](https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/ci.yml)
-[![Upstream Update](https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/update.yml/badge.svg)](https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/update.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Nix Flake](https://img.shields.io/badge/Nix-Flake-7f9ee8.svg?logo=nixos)](flake.nix)
+  <p>
+    <a href="https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/ci.yml"><img src="https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/ci.yml/badge.svg" alt="CI Status" /></a>
+    <a href="https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/update.yml"><img src="https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/update.yml/badge.svg" alt="Upstream Update" /></a>
+    <a href="https://nixos.org"><img src="https://img.shields.io/badge/Nix_Flake-blue?logo=nixos&logoColor=white" alt="Nix Flake" /></a>
+    <a href="https://wayland.freedesktop.org/"><img src="https://img.shields.io/badge/Wayland-Ready-green?logo=wayland&logoColor=white" alt="Wayland Ready" /></a>
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License" /></a>
+  </p>
+</div>
 
 Official vendor binary packaging of **Google Antigravity 2.0** (Agent Hub / Mission Control) for NixOS, featuring automated 24-hour upstream updates, native Wayland/X11 desktop integration, and GPU-accelerated FHS sandboxing.
 
