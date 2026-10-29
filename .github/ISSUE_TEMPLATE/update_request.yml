@@ -1,0 +1,28 @@
+name: Upstream Update Request
+description: Report that a new official upstream release of Google Antigravity Hub is available
+labels: ["upstream-update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Google Antigravity Hub is monitored automatically every 24 hours. If an official update has been available on https://antigravity.google/download for more than 24 hours without a package release, please let us know.
+  - type: input
+    id: upstream_version
+    attributes:
+      label: New Upstream Version
+      placeholder: "e.g., 2.29.0"
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: Official Source Link
+      description: Link to the official download page or release announcement.
+      placeholder: "https://antigravity.google/download"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Release Notes & Breaking Changes
+      description: Any notable changes in dependencies, binary format, or behavior?

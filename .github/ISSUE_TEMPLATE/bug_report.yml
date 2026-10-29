@@ -1,0 +1,69 @@
+name: Bug Report
+description: Report a packaging, installation, or runtime issue with Google Antigravity Hub on NixOS
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue! Please ensure you have tested the latest commit of this flake and verify that account/billing questions are directed to Google Antigravity support.
+  - type: input
+    id: version
+    attributes:
+      label: Package Version
+      description: What version of Antigravity Hub are you running? (e.g., 2.28.1 or git commit hash)
+      placeholder: "2.28.1"
+    validations:
+      required: true
+  - type: input
+    id: nixos_version
+    attributes:
+      label: NixOS Version
+      description: Run `nixos-version` and paste the output here.
+      placeholder: "24.11.20241029.xxxx (Vicuna) or unstable"
+    validations:
+      required: true
+  - type: dropdown
+    id: session_type
+    attributes:
+      label: Display Server & Compositor
+      description: Which display environment are you running?
+      options:
+        - "Wayland (Niri)"
+        - "Wayland (GNOME Shell)"
+        - "Wayland (KDE Plasma)"
+        - "Wayland (Hyprland / Sway)"
+        - "X11"
+        - "Other (specify below)"
+    validations:
+      required: true
+  - type: dropdown
+    id: install_method
+    attributes:
+      label: Installation Method
+      description: How did you install or run the application?
+      options:
+        - "NixOS Flake (environment.systemPackages)"
+        - "Home Manager (home.packages)"
+        - "Nixpkgs Overlay"
+        - "Imperative (nix profile install)"
+        - "Ad-hoc (nix run)"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can someone reproduce this problem?
+      placeholder: |
+        1. Add flake input ...
+        2. Rebuild with ...
+        3. Launch `antigravity-hub`
+        4. See error ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs & Terminal Output
+      description: Paste terminal output, error backtraces, or journalctl logs. Please sanitize personal tokens or email addresses.
+      render: shell
