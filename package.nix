@@ -58,7 +58,7 @@
 
 let
   pname = "antigravity-hub";
-  version = "2.28.1";
+  version = "2.28.2";
 
   antigravity-hub-unwrapped = stdenv.mkDerivation {
     pname = "${pname}-unwrapped";
@@ -66,8 +66,8 @@ let
 
     src = fetchurl {
       name = "Antigravity-Hub-${version}-linux-x64.tar.gz";
-      url = "https://storage.googleapis.com/antigravity-public/antigravity-hub/2.28.1-6709500728705024/linux-x64/Antigravity.tar.gz";
-      hash = "sha256-FbFVeOQy6kMuf8kKxi4UCoRO6ylWU69yql/Vo2SU3vc=";
+      url = "https://storage.googleapis.com/antigravity-public/antigravity-hub/2.28.2-5937220255875072/linux-x64/Antigravity.tar.gz";
+      hash = "sha256-vZKTiwiIY7r/VosII2928NI36KOVgQd6B5N/TcbhOMM=";
     };
 
     # The tarball unpacks into Antigravity-x64/
