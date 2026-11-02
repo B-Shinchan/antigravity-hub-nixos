@@ -108,19 +108,22 @@ let
         mkdir -p $out/share/icons/hicolor/''${size}x''${size}/apps
         magick "$_icon_src" -filter Lanczos -resize ''${size}x''${size} \
           $out/share/icons/hicolor/''${size}x''${size}/apps/antigravity-hub.png
-        ln -s antigravity-hub.png $out/share/icons/hicolor/''${size}x''${size}/apps/antigravity.png
+        # Do NOT create antigravity.png symlinks here; that name belongs to antigravity-ide.
       done
       install -Dm644 ${./assets/antigravity-hub.png} $out/share/pixmaps/antigravity-hub.png
-      ln -s antigravity-hub.png $out/share/pixmaps/antigravity.png
+      # Do NOT symlink antigravity.png here — antigravity-ide owns that icon name.
 
-      # Install desktop entries (both canonical antigravity-hub and Wayland app_id alias antigravity)
+      # Install desktop entry — only the canonical antigravity-hub.desktop.
+      # Do NOT create an antigravity.desktop alias here: that name is owned by
+      # antigravity-ide and creating a second file with the same basename causes
+      # XDG deduplication failures and duplicate search results in GNOME Shell.
+      # The Wayland app_id "antigravity" is declared via StartupWMClass in the
+      # desktop file itself, which is the correct mechanism.
       install -Dm644 ${./assets/antigravity-hub.desktop} \
         $out/share/applications/antigravity-hub.desktop
-      ln -s antigravity-hub.desktop $out/share/applications/antigravity.desktop
 
-      # Validate the desktop files
+      # Validate the desktop file
       desktop-file-validate $out/share/applications/antigravity-hub.desktop
-      desktop-file-validate $out/share/applications/antigravity.desktop
 
       runHook postInstall
     '';
