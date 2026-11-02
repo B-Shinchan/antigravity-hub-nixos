@@ -10,7 +10,7 @@ from pathlib import Path
 root = Path(sys.argv[1]).resolve()
 application_name = "Antigravity Hub"
 launcher = root / "bin/antigravity-hub"
-expected_entries = {"antigravity-hub.desktop", "antigravity.desktop"}
+expected_entries = {"antigravity-hub.desktop"}
 found_entries = {p.name for p in (root / "share/applications").glob("*.desktop")}
 assert found_entries == expected_entries, f"Expected {expected_entries}, found {found_entries}"
 entry = root / "share/applications/antigravity-hub.desktop"
