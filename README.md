@@ -6,6 +6,7 @@
   <p>
     <a href="https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/ci.yml"><img src="https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/ci.yml/badge.svg" alt="CI Status" /></a>
     <a href="https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/update.yml"><img src="https://github.com/B-Shinchan/antigravity-hub-nixos/actions/workflows/update.yml/badge.svg" alt="Upstream Update" /></a>
+    <a href="https://github.com/B-Shinchan/antigravity-hub-nixos/releases"><img src="https://img.shields.io/github/v/release/B-Shinchan/antigravity-hub-nixos?logo=github&label=Release" alt="Latest Release" /></a>
     <a href="https://nixos.org"><img src="https://img.shields.io/badge/Nix_Flake-blue?logo=nixos&logoColor=white" alt="Nix Flake" /></a>
     <a href="https://wayland.freedesktop.org/"><img src="https://img.shields.io/badge/Wayland-Ready-green?logo=wayland&logoColor=white" alt="Wayland Ready" /></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License" /></a>
@@ -23,7 +24,7 @@ Google Antigravity 2.0 is an agentic AI coding platform and mission control cent
 > [!NOTE]
 > **Antigravity Hub vs. Antigravity IDE**:
 > - **Antigravity Hub** (this repository): Google's standalone agent mission control application (`antigravity-hub`). It provides the agent orchestration UI, task manager, artifact viewers, and background language server.
-> - **Antigravity IDE**: Google's agent-first code editor built on VS Code (`antigravity-ide`). If you are looking for the editor, see [B-Shinchan/antigravity-nixos](https://github.com/B-Shinchan/antigravity-nixos).
+> - **Antigravity IDE**: Google's agent-first code editor built on VS Code (`antigravity-ide`). If you are looking for the editor, see [B-Shinchan/antigravity-ide-nixos](https://github.com/B-Shinchan/antigravity-ide-nixos).
 >
 > Both applications can be installed and run concurrently with zero conflict in desktop docks, window switchers, or user data directories.
 
@@ -32,7 +33,7 @@ Google Antigravity 2.0 is an agentic AI coding platform and mission control cent
 ## Features
 
 - **Official Upstream Binaries**: Packaged directly from Google's canonical distribution at `https://antigravity.google/download`.
-- **Automated Daily Updates**: A scheduled GitHub Actions workflow checks for new Google releases every 24 hours, validates SHA-256 SRI hashes, runs automated tests, and updates the package without manual intervention.
+- **Automated Updates**: A scheduled GitHub Actions workflow checks for new Google releases every 6 hours, validates SHA-256 SRI hashes, runs automated tests, and updates the package without manual intervention.
 - **Flawless Desktop Integration**: Standard Freedesktop desktop entries, complete hicolor icon sets (16×16 to 1024×1024), and proper `StartupWMClass` matching.
 - **Hardware Acceleration**: GPU-accelerated rendering under Wayland and X11 with Vulkan, VA-API, and OpenGL support.
 - **Isolated User State**: Stores data in `~/.config/Antigravity` and `~/.gemini/antigravity`, completely isolated from other applications.
@@ -148,6 +149,32 @@ Updates are never committed unless:
 
 ---
 
+## 📌 Version Management & Pinning
+
+This repository publishes structured [GitHub Releases](https://github.com/B-Shinchan/antigravity-hub-nixos/releases) tracking each upstream Google Antigravity Hub release.
+
+### Understanding Versions
+
+1. **Upstream Application Version**: The official version released by Google (e.g., `2.28.2`, build `5937220255875072`).
+2. **Nix Package Version**: Declared in `package.nix` (`version = "2.28.2"`) and exposed via Flake outputs (`packages.x86_64-linux.default.version`).
+3. **GitHub Packaging Release**: Git tags formatted as `v<UPSTREAM_VERSION>` (e.g., `v2.28.2`). Packaging-only fixes use `v<UPSTREAM_VERSION>-<REVISION>` (e.g., `v2.28.2-1`).
+
+### Pinning a Specific Release
+
+By default, referencing `github:B-Shinchan/antigravity-hub-nixos` tracks the latest release on `main`. To pin an exact validated version in your `flake.nix`:
+
+```nix
+inputs.antigravity-hub.url = "github:B-Shinchan/antigravity-hub-nixos/v2.28.2";
+```
+
+To update pinned inputs:
+
+```bash
+nix flake update antigravity-hub
+```
+
+---
+
 ## Verification & Local Testing
 
 You can run the full test suite locally:
@@ -173,7 +200,7 @@ This package is part of a suite of official vendor AI applications packaged for 
 | :--- | :--- | :--- |
 | **ChatGPT Desktop** | `chatgpt` | [chatgpt-desktop-nixos](https://github.com/B-Shinchan/chatgpt-desktop-nixos) |
 | **Claude Desktop** | `claude-desktop` | [claude-desktop-nixos](https://github.com/B-Shinchan/claude-desktop-nixos) |
-| **Google Antigravity IDE** | `antigravity-ide` | [antigravity-nixos](https://github.com/B-Shinchan/antigravity-nixos) |
+| **Google Antigravity IDE** | `antigravity-ide` | [antigravity-ide-nixos](https://github.com/B-Shinchan/antigravity-ide-nixos) |
 | **Google Antigravity Hub** | `antigravity-hub` | [antigravity-hub-nixos](https://github.com/B-Shinchan/antigravity-hub-nixos) |
 
 ---
