@@ -32,7 +32,7 @@ def main():
     )
     if url_match:
         build = url_match.group(2)
-        url = url_match.group(0).replace('url = "', '').rstrip('";')
+        url = url_match.group(0).replace('url = "', "").rstrip('";')
     else:
         build = "unknown"
         url = f"https://storage.googleapis.com/antigravity-public/antigravity-hub/{version}/linux-x64/Antigravity.tar.gz"
