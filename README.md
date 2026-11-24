@@ -13,7 +13,7 @@
   </p>
 </div>
 
-Official vendor binary packaging of **Google Antigravity 2.0** (Agent Hub / Mission Control) for NixOS, featuring automated 24-hour upstream updates, native Wayland/X11 desktop integration, and GPU-accelerated FHS sandboxing.
+Official vendor binary packaging of **Google Antigravity 2.0** (Agent Hub / Mission Control) for NixOS, featuring automated weekly upstream updates, native Wayland/X11 desktop integration, and GPU-accelerated FHS sandboxing.
 
 ---
 
@@ -33,7 +33,7 @@ Google Antigravity 2.0 is an agentic AI coding platform and mission control cent
 ## Features
 
 - **Official Upstream Binaries**: Packaged directly from Google's canonical distribution at `https://antigravity.google/download`.
-- **Automated Updates**: A scheduled GitHub Actions workflow checks for new Google releases every 6 hours, validates SHA-256 SRI hashes, runs automated tests, and updates the package without manual intervention.
+- **Automated Updates**: A scheduled GitHub Actions workflow checks for new Google releases every Sunday at 09:37 IST, validates SHA-256 SRI hashes, runs automated tests, and updates the package without manual intervention.
 - **Flawless Desktop Integration**: Standard Freedesktop desktop entries, complete hicolor icon sets (16×16 to 1024×1024), and proper `StartupWMClass` matching.
 - **Hardware Acceleration**: GPU-accelerated rendering under Wayland and X11 with Vulkan, VA-API, and OpenGL support.
 - **Isolated User State**: Stores data in `~/.config/Antigravity` and `~/.gemini/antigravity`, completely isolated from other applications.
@@ -126,7 +126,7 @@ Both Antigravity Hub and Antigravity IDE can run side-by-side with independent d
 
 ## Automated Update Architecture
 
-This repository uses a two-phase GitHub Actions workflow that runs every 24 hours:
+This repository uses a two-phase GitHub Actions workflow that runs every Sunday at 09:37 IST:
 
 ```mermaid
 flowchart TD
